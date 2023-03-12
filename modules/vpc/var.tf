@@ -1,27 +1,27 @@
 variable "vpc_cidr_block" {
-    type = string
+  type = string
 }
 
 variable "public_cidr_block" {
-  type = list
+  type = list(any)
 }
 
 variable "private_cidr_block" {
-    type = list
+  type = list(any)
 }
 
 variable "azs" {
-    type = list(string)
+  type = list(string)
 }
 
 variable "env" {
-    type = string
+  type = string
 }
 
 variable "appname" {
-    type = string
+  type = string
 }
 
 variable "tags" {
-    type = map(string)
+  type = map(string)
 }
