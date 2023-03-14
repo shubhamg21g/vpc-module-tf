@@ -21,10 +21,12 @@ module "loadbalancer" {
   appname         = "crypto-lb"
   env             = "dev"
   internal        = "false"
-  type            = "application"
+  type            = "network"
   subnets         = module.vpc.public_subnet_ids
   security_groups = [module.vpc.security_groups]
+  vpc_id          = module.vpc.vpc_id
   tags = {
     Owner = "dev-team"
   }
 }
+

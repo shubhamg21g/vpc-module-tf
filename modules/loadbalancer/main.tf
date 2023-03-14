@@ -53,3 +53,35 @@ resource "random_string" "random" {
   special          = false
   upper            = false
 }
+
+resource "aws_lb_target_group" "mytg" {
+  name     = format ( "%s-%s-%s",var.appname,var.env,"mytg")
+  port     = 80
+  protocol = var.type == "application" ? "HTTP" : "TCP"
+  vpc_id   = var.vpc_id
+}
+
+resource "aws_lb_listener" "lb-listener" {
+  port     = 80
+  protocol = var.type == "application" ? "HTTP" : "TCP"
+
+
+    dynamic "default_action" {
+    for_each = var.type == "application" ? [1] : []
+    content {
+      type             = "forward"
+      target_group_arn = aws_lb_target_group.mytg.arn
+    }
+  }
+
+  dynamic "default_action" {
+    for_each = var.type == "network" ? [1] : []
+    content {
+      type             = "forward"
+      target_group_arn = aws_lb_target_group.mytg.arn
+    }
+  }
+
+ load_balancer_arn = element(var.type == "application" ? aws_lb.alb[*].arn : aws_lb.nlb[*].arn, 0)
+
+}
