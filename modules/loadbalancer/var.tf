@@ -1,32 +1,36 @@
 variable "appname" {
-    type = string
+  type = string
 }
 
 variable "env" {
-    type = string
+  type = string
 }
 
 variable "internal" {
-    type = string
+  type = string
 }
 
 variable "type" {
-    type = string
+  type = string
 }
 
 variable "tags" {
-    type = map(string)
-    default = {}
+  type    = map(string)
+  default = {}
 }
 
 variable "subnets" {
-    type = list(string)
+  type = list(string)
 }
 
 variable "security_groups" {
-    type = set(string)
+  type = set(string)
 }
 
 variable "vpc_id" {
-    type = string
+  type = string
+}
+
+variable "autoscaling_group_name" {
+  type = string
 }

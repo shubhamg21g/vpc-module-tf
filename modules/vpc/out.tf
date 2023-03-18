@@ -9,3 +9,7 @@ output "security_groups" {
 output "vpc_id" {
   value = aws_vpc.myvpc.id
 }
+
+output "vpc_zone_identifier" {
+  value = aws_subnet.public.*.id
+}
