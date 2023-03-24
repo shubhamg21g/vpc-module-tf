@@ -1,4 +1,4 @@
 # vpc-module-tf
-#after create cluster you would run the following command for access kubectl from the cli (error- Unable to connect to the server: dial tcp: lookup 92909BF2B740605DB2FA271FF844FAF1.gr7.us-west-2.eks.amazonaws.com on 192.168.29.1:53: no such host) :- 
-aws eks --region us-east-1 update-kubeconfig --name k21-eks-cluster-cli
-#also install kubectl in cli mode.
+#firstly install kubectl in cli mode.
+Configure kubectl with the EKS API server credentials: To do this, run the following command, replacing [EKS_Region] and [EKS_Cluster_Name] with the appropriate values for your cluster:
+# aws eks --region [EKS_Region] update-kubeconfig --name [EKS_Cluster_Name]
