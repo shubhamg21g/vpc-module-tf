@@ -22,3 +22,7 @@ variable "subnets" {
 variable "security_groups" {
   type = set(string)
 }
+
+variable "key_pair" {
+  type = string
+}

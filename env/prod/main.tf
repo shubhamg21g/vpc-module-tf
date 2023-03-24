@@ -21,9 +21,28 @@ module "jenkins" {
   appname         = "jenkins"
   env             = "prod"
   instance_type   = "t2.micro"
+  key_pair        = "oregon-key"
   subnets         = module.vpc.public_subnet_ids
   security_groups = [module.vpc.security_groups]
   tags = {
     Owner = "dev-team"
   }
+}
+
+module "eks" {
+  source                  = "../../modules/eks-cluster"
+  appname                 = "eks-cluster"
+  env                     = "prod"
+  aws_public_subnet       = module.vpc.public_subnet_ids
+  vpc_id                  = module.vpc.vpc_id
+  security_group_ids      = [module.vpc.security_groups]
+  endpoint_public_access  = true
+  endpoint_private_access = false
+  public_access_cidrs     = ["0.0.0.0/0"]
+  node_group_name         = "worker-node"
+  scaling_desired_size    = 1
+  scaling_max_size        = 1
+  scaling_min_size        = 1
+  instance_types          = ["t3.medium"]
+  key_pair                = "oregon-key"
 }

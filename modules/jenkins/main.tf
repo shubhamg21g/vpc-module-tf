@@ -22,7 +22,7 @@ resource "aws_instance" "web" {
     Name = format("%s-%s-%s", var.appname, var.env, "studentapp")
   }
 
-  key_name               = "oregon-key"
+  key_name               = var.key_pair
   vpc_security_group_ids = var.security_groups
 
   user_data = <<EOF
